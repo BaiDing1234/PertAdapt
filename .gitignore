@@ -1,0 +1,11 @@
+# Python cache
+__pycache__/
+.ipynb_checkpoints/
+
+# Data & large files
+data/
+*.h5ad
+*.npz
+
+# Logs
+*.log
