@@ -1,8 +1,6 @@
 # PertAdapt: Unlocking Single-Cell Foundation Models for Genetic Perturbation Prediction via Condition-Sensitive Adaptation
 
-&lt;p align="center"&gt;
-  &lt;img src="https://github.com/BaiDing1234/PertAdapt/blob/main/img/model.pdf" alt="pertadapt" width="900px" /&gt;
-&lt;/p&gt;
+<p align="center"><img src="https://github.com/BaiDing1234/PertAdapt/blob/main/img/model.pdf" alt="attnpert" width="900px" /></p>
 
 ---
 
