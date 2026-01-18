@@ -28,18 +28,50 @@ git clone https://github.com/BaiDing1234/PertAdapt.git
 cd PertAdapt
 ```
 
-Create and activate the environment:
+### For the scFoundation backbone:
+
+If you only plan to run PertAdapt with the **scFoundation** backbone, we recommend starting with the provided `environment.yml`:
 
 ```bash
 conda env create -f environment.yml
 conda activate pertadapt
 ```
 
-Make sure the environment is correctly set up by running:
+If the environment creation fails on your machine (e.g., due to CUDA / PyTorch build differences), you can install dependencies manually. In practice, the environment is not strict: only a small set of core libraries is required, and recent versions (not necessarily exact pinned versions) should work:
+
+Pytorch (with the appropriate CUDA build for your GPU) (https://pytorch.org/).
+
+einops (https://einops.rocks/);
+
+Python >=v3.7.16 (https://www.python.org/), 
+
+NumPy >=v1.21.5 (https://github.com/numpy/numpy), 
+
+SciPy >=v1.7.3 (https://www.scipy.org/), 
+
+Matplotlib >=v3.5.3 (https://github.com/matplotlib/matplotlib), 
+
+Pandas >=v1.3.5 (https://github.com/pandas-dev/pandas), 
+
+scikit-learn >=v1.0.2 (https://github.com/scikit-learn/scikit-learn) 
+
+scanpy >=1.9.3 (https://github.com/scverse/scanpy).
+
+PyTorch Geometric >=2.3.0 (https://github.com/pyg-team/pytorch_geometric)
+
+
+### For the AIDO.Cell backbone:
+
+To run PertAdapt with the AIDO.Cell backbone, please follow the AIDO.Cell / ModelGenerator setup first:
 
 ```bash
-python -c "import torch; print(torch.__version__)"
+git clone https://github.com/genbio-ai/ModelGenerator.git
+cd ModelGenerator
+pip install -e .
 ```
+
+Then, copy (or symlink) the AIDO.Cell-specific files from this repository into the corresponding locations inside ModelGenerator/ (see AIDOCell/ in this repo), and run PertAdapt from within the ModelGenerator environment. This ensures the backbone weights, configs, and utilities match the expected AIDO.Cell pipeline.
+
 
 ---
 
