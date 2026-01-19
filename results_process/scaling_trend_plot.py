@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import pickle
 
 import matplotlib as mpl
-import matplotlib.pyplot as plt
+from scipy import stats
 
 plt.rcParams.update({
     'font.family': 'DejaVu Sans',
@@ -18,6 +18,7 @@ plt.rcParams.update({
 
 # x-axis (parameter sizes in millions)
 x = np.log(np.array([3, 10, 100]))
+n = 5
 datasets = ['Norman', 'Replogle RPE1']
 methods = ['AIDO.Cell', 'AIDO.Cell+Ours']
 
@@ -35,10 +36,13 @@ for j, dataset in enumerate(datasets):
     # baseline
     mse_base = results_dict[dataset]['AIDO.Cell']['mean'] # mean
     std_base = results_dict[dataset]['AIDO.Cell']['std']  # std
+    CI_base = std_base * stats.t.ppf(0.975, n-1)/np.sqrt(n)
+
 
     # ours
     mse_ours = results_dict[dataset]['AIDO.Cell+Ours']['mean'] # mean
     std_ours = results_dict[dataset]['AIDO.Cell+Ours']['std']  # std
+    CI_ours = std_ours * stats.t.ppf(0.975, n-1)/np.sqrt(n)
 
 
     if dataset == 'Norman':
@@ -55,14 +59,14 @@ for j, dataset in enumerate(datasets):
 
     # baseline
     ax.plot(x, mse_base, marker='.', label="AIDO.Cell", color="#0072B2")
-    ax.fill_between(x, mse_base-std_base, mse_base+std_base, alpha=0.2, color="#0072B2")
-    ax.errorbar(x, mse_base, yerr=std_base, color="#0072B2", capsize=1)
+    ax.fill_between(x, mse_base-CI_base, mse_base+CI_base, alpha=0.2, color="#0072B2")
+    ax.errorbar(x, mse_base, yerr=CI_base, color="#0072B2", capsize=1)
 
 
     # ours
     ax.plot(x, mse_ours, marker='.', label="AIDO.Cell+Ours", color="#CC79A7")
-    ax.fill_between(x, mse_ours-std_ours, mse_ours+std_ours, alpha=0.2, color="#CC79A7")
-    ax.errorbar(x, mse_ours, yerr=std_ours, color="#CC79A7", capsize=1)
+    ax.fill_between(x, mse_ours-CI_ours, mse_ours+CI_ours, alpha=0.2, color="#CC79A7")
+    ax.errorbar(x, mse_ours, yerr=CI_ours, color="#CC79A7", capsize=1)
 
     # x ticks as 3M, 10M, 100M
     ax.set_xticks(x, ["3M", "10M", "100M"])
