@@ -113,6 +113,23 @@ You will also find several **preprocessed perturbation datasets** used for train
 
 📌 **Download the datasets you wish to use (e.g., Norman, Replogle, Adamson, Dixit) and place them in the appropriate data directories expected by the scripts (see comments in the training scripts for exact paths).**
 
+### Dataset preprocessing
+
+If you would like to train and evaluate our model on datasets other than those used in this work (listed above),
+
+1. **Prepare the input `.h5ad` file**
+   - The dataset must be stored in **AnnData (`.h5ad`)** format.
+   - Ensure `adata.var["gene_name"]` contains **gene symbols** (not Ensembl IDs or other identifiers).
+   - Ensure `adata.X` stores **raw count integers** (i.e., unnormalized counts, not log-normalized or scaled values).
+
+2. **Run preprocessing**
+   - Navigate to the `preprocess/` directory and run:
+
+   ```bash
+   cd preprocess
+   python preprocess.py \
+     --input_file "/path/to/your/data.h5ad" \
+     --output_file "/path/to/preprocessed/data.h5ad"
 ---
 
 ## 🚀 Running Experiments
