@@ -238,10 +238,16 @@ python magnitude_dcor_mse_plot.py
 python scaling_trend_plot.py
 ```
 
-- **Figure A1 (GO statistics based on the gene-similarity mask):**
+- **Figure S1 (GO statistics based on the gene-similarity mask):**
 
 ```bash
 python go_stats_fig.py
+```
+
+- **Figure S2 (Num GO vs. MSE per gene):**
+
+```bash
+python numGO_geneMSE_plot.py
 ```
 
 The generated figures correspond to those shown in the main manuscript and appendix.
