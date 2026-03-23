@@ -71,15 +71,28 @@ class PertData:
             raise ValueError("data is either Norman/Adamson/Dixit or a path to an h5ad file")
         
         print_sys('These perturbations are not in the GO graph and is thus not able to make prediction for...')
-        not_in_go_pert = np.array(self.adata.obs[self.adata.obs.condition.apply(lambda x: not filter_pert_in_go(x, self.pert_names))].condition.unique())
+        
+        '''not_in_go_pert = np.array(self.adata.obs[self.adata.obs.condition.apply(lambda x: not filter_pert_in_go(x, self.pert_names))].condition.unique())
         print_sys(not_in_go_pert)
         
         filter_go = self.adata.obs[self.adata.obs.condition.apply(lambda x: filter_pert_in_go(x, self.pert_names))]
-        self.adata = self.adata[filter_go.index.values, :]
+        self.adata = self.adata[filter_go.index.values, :]'''
+        
+        go_mask = self.adata.obs["condition"].apply(
+            lambda x: filter_pert_in_go(x, self.pert_names)
+        )
+
+        not_in_go_pert = self.adata.obs.loc[~go_mask, "condition"].unique()
+        print_sys(not_in_go_pert)
+
+        if (~go_mask).any():
+            self.adata = self.adata[go_mask.values, :].copy()
+
         pyg_path = os.path.join(data_path, 'data_pyg')
         if not os.path.exists(pyg_path):
             os.mkdir(pyg_path)
         dataset_fname = os.path.join(pyg_path, 'cell_graphs.pkl')
+
                 
         if os.path.isfile(dataset_fname):
             print_sys("Local copy of pyg dataset is detected. Loading...")
@@ -207,8 +220,16 @@ class PertData:
                 adata = self.adata
                 adata.obs['split'] = 'test'
             
+            '''
             set2conditions = dict(adata.obs.groupby('split').agg({'condition': lambda x: x}).condition)
             set2conditions = {i: j.unique().tolist() for i,j in set2conditions.items()} 
+            '''
+
+            set2conditions = (
+            adata.obs.groupby('split')['condition']
+            .apply(lambda x: x.astype(str).unique().tolist())
+            .to_dict())
+
             pickle.dump(set2conditions, open(split_path, "wb"))
             print_sys("Saving new splits at " + split_path)
             
@@ -338,7 +359,7 @@ class PertData:
             pert_idx = self.get_pert_idx(pert_category, adata_)
 
             # Store list of genes that are most differentially expressed for testing
-            pert_de_category = adata_.obs['condition_name'][0]
+            pert_de_category = adata_.obs['condition_name'].iloc[0]
             if de:
                 de_idx = np.where(adata_.var_names.isin(
                 np.array(de_genes[pert_de_category][:num_de_genes])))[0]
@@ -350,7 +371,7 @@ class PertData:
                                         len(self.ctrl_adata), num_samples), :]
                 ctrl_obs_counts = ctrl_samples.obs['total_count']
                 for ic, c in enumerate(ctrl_samples.X):
-                    ipert_total_count = np.array([[float(ctrl_obs_counts[ic])]])
+                    ipert_total_count = np.array([[float(ctrl_obs_counts.iloc[ic])]])
                     comb = np.append(c.toarray(), ipert_total_count,axis=1)
                     Xs.append(comb)
                     ys.append(cell_z)
@@ -361,7 +382,7 @@ class PertData:
             de_idx = [-1] * num_de_genes
             ctrl_obs_counts = adata_.obs['total_count']
             for ic, cell_z in enumerate(adata_.X):
-                ipert_total_count = np.array([[float(ctrl_obs_counts[ic])]])
+                ipert_total_count = np.array([[float(ctrl_obs_counts.iloc[ic])]])
                 comb = np.append(cell_z.toarray(), ipert_total_count,axis=1)
                 Xs.append(comb)
                 ys.append(cell_z)

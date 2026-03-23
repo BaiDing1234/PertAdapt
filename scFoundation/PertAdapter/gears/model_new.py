@@ -38,7 +38,7 @@ class GraphWeightedMHA(torch.nn.Module):
                  nhead, 
                  device = 'cuda',
                  gwmha_layer_num = 1,
-                 graph_npz_file = '/l/users/ding.bai/scFoundation/pert/data/go_mask_19264.npz'):
+                 graph_npz_file = '/root/autodl-tmp/data/go_mask_19264.npz'):
         super(GraphWeightedMHA, self).__init__()
         self.head_dim = d_model // nhead
         assert (
@@ -256,7 +256,7 @@ class GEARS_Model_Pert_Adapter_New(torch.nn.Module):
         self.args = args
 
         if args.get('record_pred', False):
-            self.pred_dir = f"/l/users/ding.bai/scFoundation/pert/results_record/preds/{self.args['exp_name']}"
+            self.pred_dir = f"/root/autodl-tmp/results_record/preds/{self.args['exp_name']}"
             if not os.path.exists(self.pred_dir):
                 os.mkdir(self.pred_dir)
             self.pred_batch_idx = 0
@@ -464,7 +464,7 @@ class PertAdapterNew(nn.Module):
     # v3.3: input directly addition, only addition with the sum-pooled pert-encodings, and then weighted self-attn.
     #########
     def __init__(self, d_model, nhead, 
-                 graph_npz_file = '/l/users/ding.bai/scFoundation/pert/data/go_mask_19264.npz'):
+                 graph_npz_file = '/root/autodl-tmp/data/go_mask_19264.npz'):
         super(PertAdapterNew, self).__init__()
         self.mha = MultiheadAttention(d_model, nhead, batch_first=True)
         self.norm0 = torch.nn.LayerNorm(d_model)
@@ -502,7 +502,7 @@ class PertAdapterGraphWeightedMHA(nn.Module):
     # v3.3: input directly addition, only addition with the sum-pooled pert-encodings, and then weighted self-attn.
     #########
     def __init__(self, d_model, nhead, device = 'cuda', gwmha_layer_num =  1,
-                 graph_npz_file = '/l/users/ding.bai/scFoundation/pert/data/go_mask_19264.npz'):
+                 graph_npz_file = '/root/autodl-tmp/data/go_mask_19264.npz'):
         super(PertAdapterGraphWeightedMHA, self).__init__()
         self.head_dim = d_model // nhead
         assert (

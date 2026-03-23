@@ -108,8 +108,8 @@ class GEARSAdapt_ddp:
         self.saved_pred = {}
         self.saved_logvar_sum = {}
         
-        self.ctrl_expression = torch.tensor(np.mean(self.adata.X[self.adata.obs.condition == 'ctrl'], axis = 0)).reshape(-1,).to(self.device)
-        self.ctrl_expression_std = torch.tensor(np.std(self.adata.X[self.adata.obs.condition == 'ctrl'].toarray(), axis = 0)).reshape(-1,).to(self.device)
+        self.ctrl_expression = torch.tensor(np.mean(self.adata[self.adata.obs['condition'] == 'ctrl'].X.toarray(), axis = 0)).reshape(-1,).to(self.device)
+        self.ctrl_expression_std = torch.tensor(np.std(self.adata[self.adata.obs['condition'] == 'ctrl'].X.toarray(), axis = 0)).reshape(-1,).to(self.device)
         pert_full_id2pert = dict(self.adata.obs[['condition_name', 'condition']].values)
 
         self.geneid2idx = dict(zip(self.adata.var.index.values, range(len(self.adata.var.index.values))))
@@ -532,7 +532,7 @@ class GEARSAdapt_ddp:
             
             if self.config.get('record_pred', False):
                 self.model.module.args['start_record'] = True
-                print_sys('Start recoding test results.')
+                print_sys('Start recording test results.')
                 
             # Model testing
             test_loader = self.dataloader['test_loader']
@@ -541,8 +541,9 @@ class GEARSAdapt_ddp:
                 if not test:
                     test_res = evaluate(test_loader, self.model.module, self.config['uncertainty'], self.device)
                 else:
-                    quick_model = debug_model()
-                    test_res = evaluate(test_loader, quick_model, self.config['uncertainty'], self.device)
+                    #quick_model = debug_model()
+                    #test_res = evaluate(test_loader, quick_model, self.config['uncertainty'], self.device)
+                    test_res = evaluate(test_loader, self.model.module, self.config['uncertainty'], self.device)
             test_metrics, test_pert_res = compute_metrics(test_res)    
             print_sys(f"Best performing model: {test_metrics}")
             '''

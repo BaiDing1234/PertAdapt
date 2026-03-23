@@ -89,6 +89,7 @@ def get_go_auto(gene_list, data_path, data_name):
     go_path = os.path.join(data_path, data_name, 'go.csv')
     
     if os.path.exists(go_path):
+        print_sys('Directly load GO network!')
         return pd.read_csv(go_path)
     else:
         ## download gene2go.pkl
@@ -140,6 +141,7 @@ def get_go(df_gene2go):
 class GeneSimNetwork():
     def __init__(self, edge_list, gene_list, node_map):
         self.edge_list = edge_list
+        print_sys(f'self.edge_list.keys: {self.edge_list.keys()}')
         self.G = nx.from_pandas_edgelist(self.edge_list, source='source',
                         target='target', edge_attr=['importance'],
                         create_using=nx.DiGraph())    
@@ -171,7 +173,14 @@ def get_similarity_network(network_type, adata, threshold, k, gene_list, data_pa
         # if dataset is not None:
         #     df_jaccard = pd.read_csv(dataset)
             
-        df_out = df_jaccard.groupby('target').apply(lambda x: x.nlargest(k + 1,['importance'])).reset_index(drop = True)
+        #df_out = df_jaccard.groupby('target').apply(lambda x: x.nlargest(k + 1,['importance'])).reset_index(drop = True)
+        df_out = (
+            df_jaccard
+            .sort_values("importance", ascending=False)
+            .groupby("target", group_keys=False)
+            .head(k + 1)
+            .reset_index(drop=True)
+        )
 
     return df_out
 

@@ -59,6 +59,7 @@ scanpy >=1.9.3 (https://github.com/scverse/scanpy).
 
 PyTorch Geometric >=2.3.0 (https://github.com/pyg-team/pytorch_geometric)
 
+dcor, OmegaConf, local-attention.
 
 ### For the AIDO.Cell backbone:
 
