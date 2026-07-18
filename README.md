@@ -277,6 +277,26 @@ PertAdapt/
 
 ---
 
+## Cite Us
+
+PertAdapt is now published!
+
+```
+@article{bai2026pertadapt,
+  title={PertAdapt: unlocking single-cell foundation models for genetic perturbation prediction via condition-sensitive adaptation},
+  author={Bai, Ding and Song, Le and Xing, Eric P},
+  journal={Bioinformatics},
+  volume={42},
+  number={Supplement\_1},
+  pages={btag307},
+  year={2026},
+  publisher={Oxford University Press}
+}
+```
+Paper: [https://academic.oup.com/bioinformatics/article/42/Supplement_1/btag307/8726320](https://academic.oup.com/bioinformatics/article/42/Supplement_1/btag307/8726320)
+
+---
+
 ## 🙏 Acknowledgements
 
 This project makes use of content and code from:
