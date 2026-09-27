@@ -149,6 +149,9 @@ cd scFoundation
 
 🔗 https://hopebio2020.sharepoint.com/sites/PublicSharedfiles/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FPublicSharedfiles%2FShared%20Documents%2FPublic%20Shared%20files&amp;p=true&amp;ga=1
 
+Or From Backup:
+- Download model.ckpt via [https://mbzuaiac-my.sharepoint.com/:f:/g/personal/ding_bai_mbzuai_ac_ae/IgDPdzo_YIYxQrXsvlJj5XGJAY3JZS3lyGlx_sQguzA-c2g?e=f6rL4H](https://mbzuaiac-my.sharepoint.com/:f:/g/personal/ding_bai_mbzuai_ac_ae/IgDPdzo_YIYxQrXsvlJj5XGJAY3JZS3lyGlx_sQguzA-c2g?e=f6rL4H)
+
 3. Place the downloaded checkpoint into:
 
 ```text
