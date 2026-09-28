@@ -81,7 +81,7 @@ Then, copy (or symlink) the AIDO.Cell-specific files from this repository into t
 All preprocessed datasets and auxiliary files required to run PertAdapt are hosted on OneDrive:
 
 🔗 **OneDrive link:**  
-[https://mbzuaiac-my.sharepoint.com/:f:/g/personal/ding_bai_mbzuai_ac_ae/IgDPdzo_YIYxQrXsvlJj5XGJAY3JZS3lyGlx_sQguzA-c2g?e=f6rL4H](https://mbzuaiac-my.sharepoint.com/:f:/g/personal/ding_bai_mbzuai_ac_ae/IgDPdzo_YIYxQrXsvlJj5XGJAY3JZS3lyGlx_sQguzA-c2g?e=f6rL4H)
+[https://mbzuaiac-my.sharepoint.com/:f:/g/personal/ding_bai_mbzuai_ac_ae/IgDPdzo_YIYxQrXsvlJj5XGJAY3JZS3lyGlx_sQguzA-c2g?e=esfrXG](https://mbzuaiac-my.sharepoint.com/:f:/g/personal/ding_bai_mbzuai_ac_ae/IgDPdzo_YIYxQrXsvlJj5XGJAY3JZS3lyGlx_sQguzA-c2g?e=esfrXG)
 
 In this shared folder, the following files are **required** for running the model:
 
@@ -150,7 +150,7 @@ cd scFoundation
 🔗 https://hopebio2020.sharepoint.com/sites/PublicSharedfiles/Shared%20Documents/Forms/AllItems.aspx?id=%2Fsites%2FPublicSharedfiles%2FShared%20Documents%2FPublic%20Shared%20files&amp;p=true&amp;ga=1
 
 Or From Backup:
-- Download model.ckpt via [https://mbzuaiac-my.sharepoint.com/:f:/g/personal/ding_bai_mbzuai_ac_ae/IgDPdzo_YIYxQrXsvlJj5XGJAY3JZS3lyGlx_sQguzA-c2g?e=f6rL4H](https://mbzuaiac-my.sharepoint.com/:f:/g/personal/ding_bai_mbzuai_ac_ae/IgDPdzo_YIYxQrXsvlJj5XGJAY3JZS3lyGlx_sQguzA-c2g?e=f6rL4H)
+- Download model.ckpt via [https://mbzuaiac-my.sharepoint.com/:f:/g/personal/ding_bai_mbzuai_ac_ae/IgDPdzo_YIYxQrXsvlJj5XGJAY3JZS3lyGlx_sQguzA-c2g?e=esfrXG](https://mbzuaiac-my.sharepoint.com/:f:/g/personal/ding_bai_mbzuai_ac_ae/IgDPdzo_YIYxQrXsvlJj5XGJAY3JZS3lyGlx_sQguzA-c2g?e=esfrXG)
 
 3. Place the downloaded checkpoint into:
 
