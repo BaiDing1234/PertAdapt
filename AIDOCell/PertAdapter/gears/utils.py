@@ -331,7 +331,7 @@ def loss_adapt(pred, y, perts, adata, geneid2idx, pert2pert_full_id, dict_filter
         de_loss_weight = 0
         
     if losses_mse_value > 0:
-        mse_loss_weight = (losses_mse_value + losses_mse_value) /losses_mse_value
+        mse_loss_weight = (losses_de_value + losses_mse_value) /losses_mse_value
     else:
         mse_loss_weight = 0
 
